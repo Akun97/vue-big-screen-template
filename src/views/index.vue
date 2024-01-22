@@ -2,10 +2,10 @@
   <div id="index" ref="appRef">
     <div class="w-full h-full bg-page relative overflow-hidden">
 			<!-- 头部 -->
-			<div class="w-full h-[77px] bg-head bg-full bg-center bg-no-repeat pt-[17px] flex justify-center items-start absolute top-0 left-0 z-[3000]">
+			<header class="w-full h-[77px] bg-head bg-full bg-center bg-no-repeat pt-[17px] flex justify-center items-start absolute top-0 left-0 z-[3000]">
 				<div class="text-white text-[30px] tracking-[4px] font-douyu leading-[39px]">{{ title }}</div>
 				<!-- <template v-if="showView"> -->
-					<div 
+					<nav 
 						class="flex flex-col absolute right-0 top-[12px] items-end"
 						:style="`${showMiniMenuBefore ? '' : 'height: 36px;'}`"
 						@dblclick="stopBubbling"
@@ -27,21 +27,21 @@
 								</a>
 							</template>
 						</template>
-					</div>
+					</nav>
 				<!-- </template> -->
-			</div>
+			</header>
 			<!-- <template v-if="showView"> -->
-				<div
+				<main
 					class="w-full h-full bg-main bg-full bg-center bg-no-repeat"
 					@dblclick="stopBubbling"
 				>
-					<div class="w-full h-full pt-[77px]">
+					<div class="w-full h-full">
 						<!-- 内容 -->
 						<router-view v-slot="{ Component, route }">
 							<component :is="Component" :key="route.name"></component>
 						</router-view>
 					</div>
-				</div>
+				</main>
 			<!-- </template> -->
 		</div>
   </div>
@@ -115,7 +115,6 @@ const goProject = (item:any):string => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/scss/index.scss';
 .mini-menu-item {
 	background: linear-gradient(90deg, #095EDD 0%, rgba(10,15,38,0.4) 100%);
 }

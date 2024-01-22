@@ -1,4 +1,5 @@
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { width, height } from '@/common/constant/index';
 
 const useDraw = () => {
   // * 指向最外层容器
@@ -11,8 +12,8 @@ const useDraw = () => {
     height: '1',
   };
   // * 设计稿尺寸（px）
-  const baseWidth = 1920;
-  const baseHeight = 1080;
+  const baseWidth = width;
+  const baseHeight = height;
 
   // * 需保持的比例（默认1.77778）
   const baseProportion = parseFloat((baseWidth / baseHeight).toFixed(5));

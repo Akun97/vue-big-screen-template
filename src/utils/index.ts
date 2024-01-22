@@ -35,7 +35,7 @@ export const getInterval = (data:number[], count: number):{
 } => {
   const maxValue = Math.ceil(Math.max.apply(null, data));
   const maxPow = maxValue.toString().length - 1;
-  const max = mul(Math.ceil(div(maxValue, maxPow)), Math.pow(10, maxPow));
+  const max = mul(Math.ceil(div(maxValue, Math.pow(10, maxPow === 0 ? 1 : maxPow))), Math.pow(10, maxPow === 0 ? 1 : maxPow));
   const minValue = Math.floor(Math.min.apply(null, data));
   const min = minValue < 0 ? minValue : 0;
   // 控制分割条数，

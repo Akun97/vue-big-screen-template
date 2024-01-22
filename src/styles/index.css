@@ -1,3 +1,8 @@
+/* tailwind */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+/* 引入全局css */
+@import "@/styles/scss/main.scss";
+/* element-plut 消息提示样式 */
+@import "element-plus/theme-chalk/el-message.css";

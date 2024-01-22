@@ -64,29 +64,43 @@ export const useEchatsCarousel = (chartRef:any, interval:number, select?:boolean
   }
 
   /**
-   * @description 设置轮播
+   * @description 轮播计时回调
    * */ 
-  const setIntervalMyChart = (i?:number):void => {
-    clearTimer();
-    const intervalFunc = (i?:number) => {
-      // 清除高亮跟提示
+  const intervalFunc = (i?:number) => {
+    // 清除高亮跟提示
+    if (i !== index.value) {
       dispatchActionChart(select ? "unselect" : "downplay", index.value);
       dispatchActionChart("hideTip", index.value);
-      if (i) {
-        index.value = i;
+    }
+    if (typeof i === 'number') {
+      index.value = i;
+    } else {
+      if (index.value < (dataLength.value - 1)) {
+        // 索引增加
+        index.value = index.value + 1;
       } else {
-        if (index.value < (dataLength.value - 1)) {
-          // 索引增加
-          index.value = index.value + 1;
-        } else {
-          index.value = initIndex.value;
-        }
+        index.value = initIndex.value;
       }
+    }
+    setTimeout(() => {
       // 激活高亮跟提示
       dispatchActionChart(select ? "select" : "highlight", index.value);
       dispatchActionChart("showTip", index.value);
-    }
+    }, 100);
+  }
+
+  /**
+   * @description 设置下标
+   * */ 
+  const setIndex = (i:number):void => {
+    clearTimer();
     intervalFunc(i);
+  }
+
+  /**
+   * @description 设置轮播
+   * */ 
+  const setIntervalMyChart = ():void => {
     // 每隔 interval 进行一次切换
     timer.value = setInterval(intervalFunc, interval);
   }
@@ -103,16 +117,10 @@ export const useEchatsCarousel = (chartRef:any, interval:number, select?:boolean
     chartRef.value.chartEvent('mouseout', () => {
       // 启动轮播
       if (mouse) {
+        setIndex(index.value);
         setIntervalMyChart();
       }
     });
-  }
-
-  /**
-   * @description 设置下标
-   * */ 
-  const setIndex = (i:number):void => {
-    setIntervalMyChart(i);
   }
 
   /**
@@ -131,6 +139,7 @@ export const useEchatsCarousel = (chartRef:any, interval:number, select?:boolean
       dispatchActionChart("hideTip", i);
     }
     if (query.autoPlay) {
+      setIndex(initIndex.value);
       setIntervalMyChart();
     } else {
       clearTimer();

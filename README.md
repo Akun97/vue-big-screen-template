@@ -28,4 +28,4 @@
 
 # 二、项目预览
 
-![](https://github.com/Akun97/vue-bigScreen-template/blob/master/README/index.png)
+![](https://github.com/Akun97/vue-big-screen-template/blob/master/README/index.png)
